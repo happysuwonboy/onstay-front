@@ -66,7 +66,7 @@ export default function ReservationContent() {
   // 날짜 유효성 검사
   useEffect(() => {
     validateDates(startDate, endDate);
-  }, [startDate, endDate]);
+  }, [startDate, endDate, selectedCouponId ]);
 
   // 날짜 유효성 검사 함수
   const validateDates = (startDate, endDate) => {
@@ -84,10 +84,15 @@ export default function ReservationContent() {
         setIsValidDated(false);
         setBtnText('예약 불가한 날짜가 포함되어 있습니다');
         return false;
-      } else {
+      } else if(!selectedCouponId){
         setIsValidDated(true);
         const { nightCnt, payPrice } = fnPrice(startDate, endDate, price);
         setBtnText(`${nightCnt}박 : ₩${payPrice.toLocaleString()} 결제하기`);
+        return true;
+      } else {
+        setIsValidDated(true);
+        const { nightCnt } = fnPrice(startDate, endDate, price);
+        setBtnText(`${nightCnt}박 : ₩${totalPayPrice.toLocaleString()} 결제하기`);
         return true;
       }
     } else {
@@ -217,7 +222,7 @@ export default function ReservationContent() {
         <ConfirmModal 
               handleModal={handleReservationModal} 
               handleConfirm={handleReservationConfirm} 
-              noti_1={`${roomInfoData.acc_name}의 ${roomInfoData.room_name} 객실( ${nightCnt}박 ) ₩${payPrice.toLocaleString()}원 선택하셨습니다.`}
+              noti_1={`${roomInfoData.acc_name}의 ${roomInfoData.room_name} 객실( ${nightCnt}박 ) ₩${totalPayPrice.toLocaleString()}원 선택하셨습니다.`}
               noti_2='예약하시겠습니까?' 
               btnText='예약하기' />
       }

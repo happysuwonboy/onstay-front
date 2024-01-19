@@ -6,7 +6,6 @@ import ConfirmModal from '../components/common/ConfirmModal';
 
 export function Reservation() {
     const userInfo = useUserInfo();
-    console.log(userInfo);
     const navigate = useNavigate();
 
     // 모달창 확인 버튼 클릭

@@ -18,7 +18,7 @@ export default function Agreement(props) {
   const validateAgreements = () => {
     const allAgreed = checkboxes.personal.checked && checkboxes.minor.checked && checkboxes.refund.checked;
     setIsAgree(allAgreed);
-    isValidDated && setBtnText(`${nightCnt}박 : ₩${payPrice.toLocaleString()} 결제하기`)
+    // isValidDated && setBtnText(`${nightCnt}박 : ₩${payPrice.toLocaleString()} 결제하기`)
   };
 
   // 약관 동의 check 이벤트 핸들러 ( 전체 동의와 개별 동의 클릭 구현 )
